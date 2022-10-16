@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\ContatosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Rota da API para controle de contatos
+Route::resource('/contato', ContatosController::class);
