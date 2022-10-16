@@ -1,0 +1,115 @@
+*** Passo-a-passo criação do projeto ***
+*** ESTE PASSO A PASSO LHE GUIARÁ PARA A SPA, mas ainda não estudaremos crud neste arquivo ***
+
+Instalando Laravel (via terminal):
+>  composer create-project laravel/laravel {app-name} "8.*"
+
+----------------------------------------------------------------------------
+
+Agora, dentro da pasta do projeto recém instalado, vamos instalar o Vue JS:
+> composer require laravel/ui "^3.0"
+> php artisan ui vue
+> npm install --save vue@next
+> npm install --save-dev vue-loader@next
+
+----------------------------------------------------------------------------
+
+Substituir conteúdo de /webpack.mix.js para: 
+
+const mix = require('laravel-mix');
+
+mix.js('resources/js/app.js', 'public/js')
+    .vue()  //..verify this!
+    .postCss('resources/css/app.css', 'public/css', [
+        //
+    ]);
+
+----------------------------------------------------------------------------
+
+*** CRIANDO COMPONENTE VUE ***
+
+Agora vamos até a pasta /resources/js. Note que há uma pasta chamada components. É nessa pasta que ficarão todos os componentes do Vue. Note que já existe um componente chamado ExampleComponent, criado pelo Laravel UI. Agora crie um arquivo chamado { nome-do-componente.vue }. O código desse arquivo pode ser algo como:
+
+<template>
+  <div>
+    <h1>Welcome to Laravue Project!</h1>
+  </div>
+</template>
+
+<script>
+  export default {
+      name: "App"
+  }
+</script>
+
+<style scoped>
+/* CSS Here! */
+</style>
+
+----------------------------------------------------------------------------
+
+*** IMPORTANDO COMPONENTE VUE ***
+
+O arquivo resources/app.js será o ponto de entrada da aplicação Vue. Então, precisamos importar componentes nativos do Vue e os componentes que nós criamos. Precisaremos também inicializar a aplicação Vue. O arquivo deverá ficar assim:
+
+import { createApp } from 'vue';
+import App from './App.vue';
+
+import router from "./routers/router";
+
+const app = 
+    createApp(App);
+    app.use(router);
+    app.mount("#app");
+
+------------------------------------------------------------------------------------
+
+*** INTEGRANDO AO BLADE ***
+
+Abra o arquivos resources/views/welcome.blade.php. Na tag body, vamos adicionar um elemento div com o id “app“, pois no arquivo resources/app.js estamos montando a aplicação Vue num elemento HTML cujo id é “app”. O arquivo deve ficar com a seguinte aparência:
+
+<body>
+    {{-- Trazendo o vue.js para a view --}}
+    <div id="app">
+        <app></app>
+    </div>
+
+    {{-- Importando arquivo JS --}}
+    <script src="{{ mix('js/app.js') }}"></script>
+</body>
+
+--------------------------------------------------------------------------------------
+
+Para cuidar das rotas com o LaraVue, usamos o componente vue-router.
+
+Para instalá-lo em nosso projeto, aplicamos (via terminal):
+> npm install vue-router
+
+---------------------------------------------------------------------------------
+
+Em web.php (arquivo tradicional de rotas do Laravel), devemos substituir a rota
+de '/' para:
+
+> Route::get('/{any}', function () { return view('welcome'); })->where('any', '.*');
+
+Esta rota fará com que todos os caminhos GET levem para a mesma página. Dessa forma, criando
+o principal conceito de uma SPA.
+
+-----------------------------------------------------------------------------------
+
+Para compilar o JS em tempo real, devemos ativar o comando (via terminal):
+> npm run watch
+
+-----------------------------------------------------------------------------------
+
+*** Em caso de dúvidas na criação de novas SPAs, verificar os seguintes arquivos:
+/**
+* resources > views > welcome.blade.php
+* resources > js > routers > route.js
+* resources > js > view > *** todos arquivos ***
+* resources > js > app.js
+* resources > js > App.vue
+* routes > web.php
+**/
+
+Conferir e seguir padrões semelhantes para evitar problemas.
