@@ -1,0 +1,35 @@
+*** LISTANDO DADOS (read - get) ***
+
+1. API Rest
+Para iniciar o CRUD com VUE.js e Laral, é interessante desenvolvermos nossa API rest.
+Caso queira conferir, pode visualizar os arquivos routes > api.php e app > Http > Controllers > api > ContatosController.php
+
+-------------------------------------
+
+2. Axios Install
+Devemos instalar, apontando para a pasta do projeto (via terminal), o Axios.
+O Axios é a ferramenta que utilizaremos para consumir API rest. Insira o comand:
+> npm install axios --save
+
+-------------------------------------
+
+3. Services
+* Criamos a pasta 'services' em resources > js;
+* Dentro de services (pasta recém-criada), iniciamos outros 2 arquivos -> config.js e {arquivo-relacionado-a-api}.js;
+
+== ***
+* O conteúdo de resources > js > services > config.js deve ser:
+    // Importamos a biblioteca axios
+    import axios from 'axios'
+
+    // Passando a url base para o axios
+    export const http = axios.create({
+        baseURL: 'http://127.0.0.1:8000'
+    })
+*** ==
+
+Em {arquivo-relacionado-a-api}.js, vamos inserir os métodos de requisição à api.
+Sinta-se à vontade para verificar ambos arquivos. O arquivo resources > js > view > table.vue, 
+em específico, contém as inserções de dados no front-end também.
+
+-------------------------------------

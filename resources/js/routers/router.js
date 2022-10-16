@@ -8,13 +8,13 @@ import {createRouter, createWebHistory} from "vue-router";
 // Criando caminhos das rotas
 const routes = [
     {
-        path: '/',
+        path: '/spa/table',
         name: 'table',
         component: Table
     },
 
     {
-        path: '/form/create',
+        path: '/spa/form/create',
         name: 'form',
         component: Form
     },
