@@ -1,0 +1,48 @@
+*** SALVANDO REGISTRO NO BANCO DE DADOS ***
+
+1. Em resources > js > services > contatos.js, inserimos o método para realizar o registro. Deve ser algo como por exemplo:
+    
+    // cadastro dos dados - no caso, dos contatos
+    salvarContatos: (contato) => {
+        // Passamos a url da api e o verbo http
+        return http.post('/api/contato', contato);
+    }
+
+------------
+
+2. No componente onde estiver nosso formulário, devemos colocar um padrão de dados data() e associá-lo com o formulário.
+
+2.1 Observe o trecho de código (tome-o como exemplo) inserido em resources > js > services > contatos.js
+data(){
+    return {
+        contato: {
+            nome: '', // nome do contato
+            numero: '' // número do contato
+        }
+    }
+},
+
+2.2 O action do form, ou melhor, sua declaração, deve ser algo como
+    <form @submit.prevent="salvar_contato">
+        //
+
+2.3 Após isso, devemos criar o método para realizar o save. Observe:
+    methods: {
+        
+        // Função para salvar contatos
+        salvar_contato() {
+            Contatos.salvarContatos(this.contato).then(resposta => {
+                // Trazendo o retorno da api
+                alert(resposta.data.mensagem);
+
+                // Redirecionando após a execução da função
+                this.$router.push({name: "table"});
+            })
+        }
+    }
+
+> Nos inputs do formulário, colocamos v-model="objeto.nome-da-propriedade" <
+> O button não precisa de type. <
+> Sempre devemos importar o arquivo de requisições para o arquivo que queremos realizar as interações com a api <
+> Consultar os arquivos "resources > js > services > contatos.js" e "resources > js > view > form.vue" em caso de dúvida <
+--------

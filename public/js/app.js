@@ -19753,7 +19753,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({});
+/* harmony import */ var _services_contatos_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../services/contatos.js */ "./resources/js/services/contatos.js");
+// Importando arquivo responsável pela requisição da api
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  // Referenciando dados que deverão retornar do formulário
+  // Mencionamos os campos que deverão ser passados para a API
+  data: function data() {
+    return {
+      contato: {
+        nome: '',
+        // nome do contato
+        numero: '' // número do contato
+      }
+    };
+  },
+
+  methods: {
+    // Função para salvar contatos
+    salvar_contato: function salvar_contato() {
+      var _this = this;
+      _services_contatos_js__WEBPACK_IMPORTED_MODULE_0__["default"].salvarContatos(this.contato).then(function (resposta) {
+        // Trazendo o retorno da api
+        alert(resposta.data.mensagem);
+
+        // Redirecionando após a execução da função
+        _this.$router.push({
+          name: "table"
+        });
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -19885,44 +19916,55 @@ __webpack_require__.r(__webpack_exports__);
 var _hoisted_1 = {
   "class": "content-page"
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_2 = {
   "class": "input-group mb-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+};
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text",
   id: "basic-addon1"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "bi bi-person-bounding-box"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "text",
-  "class": "form-control",
-  placeholder: "Nome do contato",
-  "aria-label": "Username",
-  "aria-describedby": "basic-addon1"
 })], -1 /* HOISTED */);
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_4 = {
   "class": "input-group mb-3"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+};
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text",
   id: "basic-addon1"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "bi bi-telephone-plus"
-})]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-  type: "text",
-  "class": "form-control",
-  onkeypress: "mask(this, mphone);",
-  placeholder: "Telefone do contato",
-  "aria-label": "Username",
-  "aria-describedby": "basic-addon1"
 })], -1 /* HOISTED */);
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "button",
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "btn btn-primary btn-cadastrar"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "bi bi-sd-card"
 }), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Cadastrar")], -1 /* HOISTED */);
-var _hoisted_5 = [_hoisted_2, _hoisted_3, _hoisted_4];
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_1, _hoisted_5);
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Associando o formulário com o método salvar "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.salvar_contato && $options.salvar_contato.apply($options, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" v-model=\"\" serve para informarmos que o valor do input será passado para o data() "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": "form-control",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.contato.nome = $event;
+    }),
+    placeholder: "Nome do contato",
+    "aria-label": "Username",
+    "aria-describedby": "basic-addon1"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.contato.nome]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [_hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" v-model=\"\" serve para informarmos que o valor do input será passado para o data() "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.contato.numero = $event;
+    }),
+    "class": "form-control",
+    onkeypress: "mask(this, mphone);",
+    placeholder: "Telefone do contato",
+    "aria-label": "Username",
+    "aria-describedby": "basic-addon1"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.contato.numero]])]), _hoisted_6])], 32 /* HYDRATE_EVENTS */)], 2112 /* STABLE_FRAGMENT, DEV_ROOT_FRAGMENT */);
 }
 
 /***/ }),
@@ -20088,11 +20130,17 @@ __webpack_require__.r(__webpack_exports__);
 // Importando o método HTTP
 
 
-// Criando e exportando método
+// Criando e exportando os métodos
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  // listagem dos dados - no caso, dos contatos
   listarContatos: function listarContatos() {
     // Passamos a url da api e o verbo http
     return _config_js__WEBPACK_IMPORTED_MODULE_0__.http.get('/api/contato');
+  },
+  // cadastro dos dados - no caso, dos contatos
+  salvarContatos: function salvarContatos(contato) {
+    // Passamos a url da api e o verbo http
+    return _config_js__WEBPACK_IMPORTED_MODULE_0__.http.post('/api/contato', contato);
   }
 });
 
