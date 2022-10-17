@@ -20,5 +20,11 @@ export default {
     atualizarContatos: (contato) => {
         // Passamos a url da api e o verbo http
         return http.put(`/api/contato/${contato.id}`, contato);
+    },
+
+    // exclusão de dados - no caso, dos contatos
+    excluirContatos: (contato) => {
+        // Passamos a url da api e o verbo http
+        return http.delete(`/api/contato/${contato.id}`, {data: contato});
     }
 }
