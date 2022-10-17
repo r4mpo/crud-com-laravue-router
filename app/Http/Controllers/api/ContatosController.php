@@ -16,24 +16,40 @@ class ContatosController extends Controller
 
     public function store(Request $request)
     {
-        Contato::create($request->all());
-        return response()->json(['mensagem' => 'Contato cadastrado com sucesso!']);
+        try {
+            Contato::create($request->all());
+            return response()->json(['mensagem' => 'Contato cadastrado com sucesso!']);    
+        } catch(\Exception $e) {
+            return response()->json(['mensagem' => 'Não foi possível cadastrar o contato.']);    
+        }
     }
 
     public function show($id)
     {
-        //
+        try {
+            return response()->json(['contato' => Contato::findOrFail($id)]);
+        } catch (\Exception $e) {
+            return response()->json(['mensagem' => 'Não foi possível recuperar o contato.']);
+        }
     }
 
     public function update(Request $request, $id)
     {
-        Contato::findOrFail($id)->update($request->all());
-        return response()->json(['mensagem' => 'Contato atualizado com sucesso!']);
+        try {
+            Contato::findOrFail($id)->update($request->all());
+            return response()->json(['mensagem' => 'Contato atualizado com sucesso!']);    
+        } catch (\Exception $e) {
+            return response()->json(['mensagem' => 'Não foi possível atualizar o contato.']);
+        }
     }
 
     public function destroy($id)
     {
-        Contato::findOrFail($id)->delete();
-        return response()->json(['mensagem' => 'Contato excluído com sucesso!']);
+        try {
+            Contato::findOrFail($id)->delete();
+            return response()->json(['mensagem' => 'Contato excluído com sucesso!']);
+        } catch (\Exception $e) {
+            return response()->json(['mensagem' => 'Não foi possível excluir o contato.']);
+        }
     }
 }
