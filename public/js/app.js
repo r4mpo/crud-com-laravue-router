@@ -20141,6 +20141,16 @@ __webpack_require__.r(__webpack_exports__);
   salvarContatos: function salvarContatos(contato) {
     // Passamos a url da api e o verbo http
     return _config_js__WEBPACK_IMPORTED_MODULE_0__.http.post('/api/contato', contato);
+  },
+  // recuperação de dados - no caso, dos contatos
+  editarContatos: function editarContatos(contato) {
+    // Passamos a url da api e o verbo http
+    return _config_js__WEBPACK_IMPORTED_MODULE_0__.http.get('/api/contato/' + contato);
+  },
+  // atualização de dados - no caso, dos contatos
+  atualizarContatos: function atualizarContatos(contato) {
+    // Passamos a url da api e o verbo http
+    return _config_js__WEBPACK_IMPORTED_MODULE_0__.http.put('/api/contato', contato);
   }
 });
 
