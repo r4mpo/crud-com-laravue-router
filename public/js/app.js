@@ -19806,16 +19806,42 @@ __webpack_require__.r(__webpack_exports__);
   // Criando array para armazenar os contatos (dados da api)
   data: function data() {
     return {
-      contatos: []
+      contatos: [],
+      contato: {
+        id: '',
+        nome: '',
+        // nome do contato
+        numero: '' // número do contato
+      }
     };
   },
   // Ao instanciar o App.vue, chamamos o método para listar nossos contatos
   mounted: function mounted() {
-    var _this = this;
-    _services_contatos_js__WEBPACK_IMPORTED_MODULE_0__["default"].listarContatos().then(function (resposta) {
-      console.log(resposta.data.contatos);
-      _this.contatos = resposta.data.contatos;
-    });
+    this.listar();
+  },
+  methods: {
+    listar: function listar() {
+      var _this = this;
+      _services_contatos_js__WEBPACK_IMPORTED_MODULE_0__["default"].listarContatos().then(function (resposta) {
+        console.log(resposta.data.contatos);
+        _this.contatos = resposta.data.contatos;
+      });
+    },
+    // Função para salvar contatos
+    atualizar_contato: function atualizar_contato() {
+      var _this2 = this;
+      _services_contatos_js__WEBPACK_IMPORTED_MODULE_0__["default"].atualizarContatos(this.contato).then(function (resposta) {
+        // Trazendo o retorno da api
+        alert(resposta.data.mensagem);
+
+        // listando dados atualizados
+        _this2.listar();
+      });
+    },
+    // Enviar os dados para o modal
+    editar: function editar(contato) {
+      this.contato = contato;
+    }
   }
 });
 
@@ -19999,25 +20025,109 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
 var _hoisted_3 = {
   scope: "row"
 };
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
-  type: "button",
-  "class": "btn btn-primary"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+var _hoisted_4 = ["onClick"];
+var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "bi bi-pencil-fill"
-})])], -1 /* HOISTED */);
-var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+}, null, -1 /* HOISTED */);
+var _hoisted_6 = [_hoisted_5];
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   type: "button",
   "class": "btn btn-danger"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
   "class": "bi bi-trash3-fill"
 })])], -1 /* HOISTED */);
+var _hoisted_8 = {
+  "class": "modal fade",
+  id: "exampleModal",
+  tabindex: "-1",
+  "aria-labelledby": "exampleModalLabel",
+  "aria-hidden": "true"
+};
+var _hoisted_9 = {
+  "class": "modal-dialog"
+};
+var _hoisted_10 = {
+  "class": "modal-content"
+};
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "modal-header"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+  "class": "modal-title fs-5",
+  id: "exampleModalLabel"
+}, "EDITAR CONTATO"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "button",
+  "class": "btn-close",
+  "data-bs-dismiss": "modal",
+  "aria-label": "Close"
+})], -1 /* HOISTED */);
+var _hoisted_12 = {
+  "class": "modal-body"
+};
+var _hoisted_13 = {
+  "class": "input-group mb-3"
+};
+var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "input-group-text",
+  id: "basic-addon1"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "bi bi-person-bounding-box"
+})], -1 /* HOISTED */);
+var _hoisted_15 = {
+  "class": "input-group mb-3"
+};
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+  "class": "input-group-text",
+  id: "basic-addon1"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("i", {
+  "class": "bi bi-telephone-plus"
+})], -1 /* HOISTED */);
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  "class": "modal-footer"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  type: "button",
+  "class": "btn btn-danger",
+  "data-bs-dismiss": "modal"
+}, "Cancelar"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  "class": "btn btn-success"
+}, "Atualizar")], -1 /* HOISTED */);
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("table", _hoisted_1, [_hoisted_2, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("tbody", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Inserindo dados do array, como se fosse um loop de repetição "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.contatos, function (contato) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("tr", {
       key: contato.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(contato.id), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(contato.nome), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(contato.numero), 1 /* TEXT */), _hoisted_4, _hoisted_5]);
-  }), 128 /* KEYED_FRAGMENT */))])])]);
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("th", _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(contato.id), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(contato.nome), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(contato.numero), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" @click serve como o onclick "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("td", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+      onClick: function onClick($event) {
+        return $options.editar(contato);
+      },
+      type: "button",
+      "class": "btn btn-primary",
+      "data-bs-toggle": "modal",
+      "data-bs-target": "#exampleModal"
+    }, _hoisted_6, 8 /* PROPS */, _hoisted_4)]), _hoisted_7]);
+  }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Modal "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [_hoisted_11, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+    onSubmit: _cache[2] || (_cache[2] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {
+      return $options.atualizar_contato && $options.atualizar_contato.apply($options, arguments);
+    }, ["prevent"]))
+  }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [_hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" v-model=\"\" serve para informarmos que o valor do input será passado para o data() "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "class": "form-control",
+    "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+      return $data.contato.nome = $event;
+    }),
+    placeholder: "Nome do contato",
+    "aria-label": "Username",
+    "aria-describedby": "basic-addon1"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.contato.nome]])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [_hoisted_16, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" v-model=\"\" serve para informarmos que o valor do input será passado para o data() "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    type: "text",
+    "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
+      return $data.contato.numero = $event;
+    }),
+    "class": "form-control",
+    onkeypress: "mask(this, mphone);",
+    placeholder: "Telefone do contato",
+    "aria-label": "Username",
+    "aria-describedby": "basic-addon1"
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.contato.numero]])])]), _hoisted_17], 32 /* HYDRATE_EVENTS */)])])])]);
 }
 
 /***/ }),
@@ -20142,15 +20252,10 @@ __webpack_require__.r(__webpack_exports__);
     // Passamos a url da api e o verbo http
     return _config_js__WEBPACK_IMPORTED_MODULE_0__.http.post('/api/contato', contato);
   },
-  // recuperação de dados - no caso, dos contatos
-  editarContatos: function editarContatos(contato) {
-    // Passamos a url da api e o verbo http
-    return _config_js__WEBPACK_IMPORTED_MODULE_0__.http.get('/api/contato/' + contato);
-  },
   // atualização de dados - no caso, dos contatos
   atualizarContatos: function atualizarContatos(contato) {
     // Passamos a url da api e o verbo http
-    return _config_js__WEBPACK_IMPORTED_MODULE_0__.http.put('/api/contato', contato);
+    return _config_js__WEBPACK_IMPORTED_MODULE_0__.http.put("/api/contato/".concat(contato.id), contato);
   }
 });
 
@@ -20221,7 +20326,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.tb-style {\r\n        width: 500px;\r\n        color: #fff;\r\n        margin-top: 7%;\r\n        text-align: center;\r\n        margin-left: 25%;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.tb-style {\r\n    width: 500px;\r\n    color: #fff;\r\n    margin-top: 7%;\r\n    text-align: center;\r\n    margin-left: 25%;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
